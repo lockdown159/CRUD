@@ -47,7 +47,7 @@
                         <label class="control-label">Age Range</label>
                         <div class="controls">
                             <label class="checkbox">
-                                <?php echo $data['event_age'];?>
+                                <?php echo $data['age_range'];?>
                             </label>
                         </div>
                       </div>
@@ -55,7 +55,7 @@
                         <label class="control-label">Belt</label>
                         <div class="controls">
                             <label class="checkbox">
-                                <?php echo $data['event_belt'];?>
+                                <?php echo $data['belt_range'];?>
                             </label>
                         </div>
                       </div>

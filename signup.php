@@ -2,6 +2,22 @@
 session_start();
 include_once "database.php";
 
+        // keep track validation errors
+        //$nameError = null;
+        //$emailError = null;
+        //$ageError = null;
+        //$beltError = null;
+
+        // keep track post values
+        //$name = $_POST['events_name'];
+        //$email = $_POST['events_date'];
+        //$age = $_POST['age'];
+        //$belt = $_POST['belt'];
+        
+        //$location = $_POST['events_location'];
+        //$time = $_POST['events_time'];
+        //$dis = $_POST['events_dis'];
+
 function validate_input($input, $length){
     if (isset($input)){
         if(!empty($input)){
@@ -56,11 +72,19 @@ if(isset($_POST["signup"])){
     if(validate_input($_POST["password"], 5)){
         if($_POST["password"] !=$_POST["cpassword"]){
             $pass=false;
-            echo "Invalid password enterd";
+            echo "Invalid password entered";
         }
     }else{
         $pass=false;
     }
+
+    //if(validate_input($_POST["email"], 1)){
+    //    if ( !filter_var($email,FILTER_VALIDATE_EMAIL) ) {
+    //    }
+    //} else {
+    //    $emailError = 'Please enter a valid email address';
+    //    $pass = false;
+    //}
 
     // if(validate_input($_POST["name"], 2)){
     // } 

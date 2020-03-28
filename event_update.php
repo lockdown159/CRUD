@@ -13,18 +13,18 @@
         $disError = null; 
 
         // keep track post values
-        $name = $_POST['events_name'];
-        $age = $_POST['age'];
-        $belt = $_POST['belt'];
-        $date = $_POST['events_date'];
-        $location = $_POST['events_location'];
-        $time = $_POST['events_time'];
-        $dis = $_POST['events_dis'];
+        $name = $_POST['event_name'];
+        $age = $_POST['age_range'];
+        $belt = $_POST['belt_range'];
+        $date = $_POST['event_date'];
+        $location = $_POST['event_location'];
+        $time = $_POST['event_time'];
+        $dis = $_POST['event_dis'];
          
         // validate input
         $valid = true;
         if (empty($name)) {
-            $nameError = 'Please enter Tournament name';
+            $nameError = 'Please enter the events name';
             $valid = false;
         }
          
@@ -34,12 +34,12 @@
         }
 
         if (empty($belt)) {
-            $beltError = 'Please enter a belt level for the tournament';
+            $beltError = 'Please enter a belt level for the event';
             $valid = false;
         }
 
         if (empty($date)) {
-            $dateError = 'Please enter the tournaments date';
+            $dateError = 'Please enter the events date';
             $valid = false;
         } else if ( !filter_var($date,FILTER_VALIDATE_DATE) ) {
             $dateError = 'Please enter a valid date';
@@ -47,7 +47,7 @@
         }
          
         if (empty($location)) {
-            $locationError = 'Please enter a location for the tournament';
+            $locationError = 'Please enter a location for the event';
             $valid = false;
         }
         
@@ -78,13 +78,13 @@
         $q = $pdo->prepare($sql);
         $q->execute(array($id));
         $data = $q->fetch(PDO::FETCH_ASSOC);
-        $name = $_POST['events_name'];
-        $age = $_POST['age'];
-        $belt = $_POST['belt'];
-        $date = $_POST['events_date'];
-        $location = $_POST['events_location'];
-        $time = $_POST['events_time'];
-        $dis = $_POST['events_dis'];
+        $name = $_POST['event_name'];
+        $age = $_POST['age_range'];
+        $belt = $_POST['belt_range'];
+        $date = $_POST['event_date'];
+        $location = $_POST['event_location'];
+        $time = $_POST['event_time'];
+        $dis = $_POST['event_dis'];
         Database::disconnect();
     }
 ?>

@@ -24,7 +24,7 @@
                     <tr>
                       <th>Event Name</th>
                       <th>Age range</th>
-                      <th>Belt</th>
+                      <th>Belt Range</th>
                       <th>Date</th>
                       <th>Location</th>
                       <th>Time</th>
@@ -40,8 +40,8 @@
                    foreach ($pdo->query($sql) as $row) {
                             echo '<tr>';
                             echo '<td>'. $row['event_name'] . '</td>';
-                            echo '<td>'. $row['age'] . '</td>';
-                            echo '<td>'. $row['belt'] . '</td>';
+                            echo '<td>'. $row['age_range'] . '</td>';
+                            echo '<td>'. $row['belt_range'] . '</td>';
                             echo '<td>'. $row['event_date'] . '</td>';
                             echo '<td>'. $row['event_location'] . '</td>';
                             echo '<td>'. $row['event_time'] . '</td>';

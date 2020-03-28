@@ -33,8 +33,8 @@
                   </thead>
                   <tbody>
                   <?php
-                   include 'database.php';
-                   //$pdo = Database::connect();
+                   include "./database.php";
+                   $pdo = Database::connect();
                    $sql = 'SELECT * FROM tournaments ORDER BY id DESC';
                    foreach ($pdo->query($sql) as $row) {
                             echo '<tr>';
@@ -53,7 +53,7 @@
                                 echo '</td>';
                             echo '</tr>';
                    }
-                   //Database::disconnect();
+                   Database::disconnect();
                   ?>
                   </tbody>
             </table>

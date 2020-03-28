@@ -2,20 +2,19 @@
 ini_set('display_startup_errors', 1);
 ini_set('display_errors', 1);
 error_reporting(-1);
-$servername = "localhost";
-$username = "root";
-$password = "12345";
-$database = "crud";
+$servername = "10.8.30.49";
+$username = "rspena355wi20";
+$password = "Kbjx475w15900";
+$database = "rspena355wi20";
 
+//echo $servername . ' ' . $username . ' ' . $database; exit();
 // Create connection
 $db = new mysqli($servername, $username, $password, $database);
-
 // Check connection
 if ($db->connect_error) {
     die("Connection failed: " . $db->connect_error);
 }
 //echo "Connected successfully";
-
 function uuidv4()
 {
     $data = openssl_random_pseudo_bytes(16);

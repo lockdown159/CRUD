@@ -29,6 +29,9 @@ $username = "No active user";
     <meta charset="utf-8">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.min.js"></script>
+
+<!-- Icon in browser tab -->
+    <link rel="icon" href="https://goldmedalsaginaw.com/wp-content/uploads/2018/09/icon-150x150.png" sizes="32x32" />
         <title> Tournament - Home</title>
         <h1> Tournament - Home</h1>
     </head>
