@@ -3,8 +3,7 @@ ini_set('display_startup_errors', 1);
 ini_set('display_errors', 1);
 error_reporting(-1);
 session_start();
-include_once "database.php";
-
+include_once "../database/database.php";
 if(isset($_GET["logout"])&& isset($_SESSION["uuid'"])){
     session_destory();
     unset($_SESSION);
@@ -16,7 +15,7 @@ $username = "No active user";
             $squery = "INSERT INTO list (user_uuid, message, uuid) VALUES (?,?,?)";
             $uuid = uuidv4();
             if($statement = $db->prepare($squery)){
-                $statment->bind_param("sss", $_SESSION["uuid"], $_POST["item"], $uuid);
+                $statement->bind_param("sss", $_SESSION["uuid"], $_POST["item"], $uuid);
                 $statement->execute();
                 $statement->close();
         }
@@ -49,7 +48,7 @@ $username = "No active user";
     if(isset($_SESSION["uuid"])){
         $query = "SELECT * FROM list WHERE user_uuid=?";
         if($statement = $db->prepare($query)){
-            $statment->bind_param("s", $_SESSION["uuid"]);
+            $statement->bind_param("s", $_SESSION["uuid"]);
             $statement->execute();
             $result = $statement->get_result();
             if($result->num_rows >0){

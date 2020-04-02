@@ -1,22 +1,7 @@
 <?php
 session_start();
-include_once "database.php";
-
-        // keep track validation errors
-        //$nameError = null;
-        //$emailError = null;
-        //$ageError = null;
-        //$beltError = null;
-
-        // keep track post values
-        //$name = $_POST['events_name'];
-        //$email = $_POST['events_date'];
-        //$age = $_POST['age'];
-        //$belt = $_POST['belt'];
-        
-        //$location = $_POST['events_location'];
-        //$time = $_POST['events_time'];
-        //$dis = $_POST['events_dis'];
+include_once "../database/database.php";
+$db = mysqli_connect("10.8.30.49", "rspena355wi20", "Kbjx475w15900", "rspena355wi20");
 
 function validate_input($input, $length){
     if (isset($input)){
@@ -29,37 +14,47 @@ function validate_input($input, $length){
     }
     return false;
 }
+
 function is_valid_username($db, $username){
+	/*
     $query = "SELECT uuid from users WHERE username = ? LIMIT 1";
-    if ($statement = $db -> prepare($query)){
-        $statement->bind_param("s",$username);
-        $statement->execute();
-        $results = $statement->get_result();
-        $statement->close();
-        if ($results->num_rows > 0) {
+    if ($statment = $db -> prepare($query)){
+        $statment->bind_param("s",$username);
+        $statment->execute();
+        $results = $statment->get_result();
+        $statment.close();
+        if ($result->num_rows > 0) {
                 return false;
         } else {
             return true;
         }
     return false;
     } 
+	*/
+	return true;
 }
+
 function signup_user($db,$username,$password){
     $query="INSERT INTO users (username, hash, uuid) VALUES (?,?,?)";
     $hash = password_hash($password, PASSWORD_BCRYPT);
     $uuid = uuidv4();
 
     if($statement = $db->prepare($query)){
+		$statement = $db->prepare($query);
+				//var_dump($statement); exit();
         $statement->bind_param("sss",$username, $hash, $uuid);
         $statement->execute();
         $statement->close();
+
     }
 }
 
 $ERROR_USERNAME = false;
+
 //Post check
-if(isset($_POST["signup"])){
+if(isset($_POST["submit"])){
     $pass=true;
+	
     if(validate_input($_POST["username"], 5)){
         if(!is_valid_username($db, $_POST["username"])){
             $pass=false;
@@ -72,33 +67,15 @@ if(isset($_POST["signup"])){
     if(validate_input($_POST["password"], 5)){
         if($_POST["password"] !=$_POST["cpassword"]){
             $pass=false;
-            echo "Invalid password entered";
+            echo "Invalid password enterd";
         }
     }else{
         $pass=false;
     }
-
-    //if(validate_input($_POST["email"], 1)){
-    //    if ( !filter_var($email,FILTER_VALIDATE_EMAIL) ) {
-    //    }
-    //} else {
-    //    $emailError = 'Please enter a valid email address';
-    //    $pass = false;
-    //}
-
-    // if(validate_input($_POST["name"], 2)){
-    // } 
-
-    // if(validate_input($_POST["age"], 1)){
-    // } 
-
-    // if(validate_input($_POST["belt"], 2)){
-    // } 
-
     if($pass){
         //this code will create a new user
         signup_user($db, $_POST["username"], $_POST["password"]);
-        header("Location: ../CRUD/tournament.php");
+		header("Location: ../CRUD/tournaments.php");
     }
 }
 ?>
@@ -110,8 +87,7 @@ if(isset($_POST["signup"])){
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.min.js"></script>
 </head>
- 
-<body>
+ <body>
     <div class="container">
      
                 <div class="span10 offset1">
@@ -119,7 +95,7 @@ if(isset($_POST["signup"])){
                         <h1>Sign Up</h1>
                     </div>
              
-                    <form class="form-horizontal" action="tournaments.php" method="post">
+                    <form class="form-horizontal" action="" method="post">
                       <div class="control-group <?php echo !empty($nameError)?'error':'';?>">
                         <label class="control-label">Username</label>
                         <div class="controls">

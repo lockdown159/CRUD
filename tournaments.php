@@ -17,6 +17,7 @@
                     <a href="tournament_read.php" class="btn btn-success">Read</a>
                     <a href="tournament_update.php" class="btn btn-success">Update</a>
                     <a href="tournament_delete.php" class="btn btn-success">Delete</a>
+					<a href= "../CRUD/logout.php">Logout</a>
                 </p>
             <div class="row">
                 <table class="table table-striped table-bordered">
@@ -33,8 +34,7 @@
                   </thead>
                   <tbody>
                   <?php
-                   include "./database.php";
-                   $pdo = Database::connect();
+                   include "../database/database_pdo.php";
                    $sql = 'SELECT * FROM tournaments ORDER BY id DESC';
                    foreach ($pdo->query($sql) as $row) {
                             echo '<tr>';
@@ -53,7 +53,6 @@
                                 echo '</td>';
                             echo '</tr>';
                    }
-                   Database::disconnect();
                   ?>
                   </tbody>
             </table>

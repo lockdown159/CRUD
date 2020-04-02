@@ -1,15 +1,6 @@
 <?php
     require '../database/database_pdo.php';
  
-    $id = null;
-    if ( !empty($_GET['id'])) {
-        $id = $_REQUEST['id'];
-    }
-     
-    if ( null==$id ) {
-        header("Location: tournaments.php");
-    }
-     
     if ( !empty($_POST)) {
         // keep track validation errors
         $nameError = null;
@@ -40,7 +31,7 @@
         }
          
         if (empty($address)) {
-            $addressError = 'Please enter a address for the tournament';
+            $addressError = 'Please enter an address for the tournament';
             $valid = false;
         }
         
@@ -58,27 +49,17 @@
             $hostError = 'Please enter a host of the tournament';
             $valid = false;
         }
-         
-        // update data
-        if ($valid) {
+
+        // insert data
+			echo $valid;
+        if ($valid==true) {
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "UPDATE tournaments set tr_name = ?, tr_date = ?, tr_address = ?, tr_city = ?, tr_state = ?, tr_host = ? WHERE id = ?";
+            $sql = "INSERT INTO tournaments (tr_name,tr_date,tr_address,tr_city,tr_state,tr_host) VALUES (?, ?, ?, ?, ?, ?)";
             $q = $pdo->prepare($sql);
-            $q->execute(array($name,$date,$location,$city,$state,$host));
+            $q->execute(array($name,$date,$address,$city,$state,$host));
+			print_r($pdo->errorInfo());
             header("Location: tournaments.php");
         }
-    } else {
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "SELECT * FROM tournaments where id = ?";
-        $q = $pdo->prepare($sql);
-        $q->execute(array($id));
-        $data = $q->fetch(PDO::FETCH_ASSOC);
-        $name = $_POST['tr_name'];
-        $date = $_POST['tr_date'];
-        $address = $_POST['tr_address'];
-        $city = $_POST['tr_city'];
-        $state = $_POST['tr_state'];
-        $host = $_POST['tr_host'];
     }
 ?>
 
@@ -98,7 +79,7 @@
                         <h3>Create a Tournament</h3>
                     </div>
              
-                    <form class="form-horizontal" action="tournament_update.php" method="post">
+                    <form class="form-horizontal" action="tournament_create.php" method="post">
                       <div class="control-group <?php echo !empty($nameError)?'error':'';?>">
                         <label class="control-label">Tournament name</label>
                         <div class="controls">
@@ -163,4 +144,3 @@
     </div> <!-- /container -->
   </body>
 </html>
-        

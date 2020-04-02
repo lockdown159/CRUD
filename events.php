@@ -17,6 +17,7 @@
                     <a href="event_read.php" class="btn btn-success">Read</a>
                     <a href="event_update.php" class="btn btn-success">Update</a>
                     <a href="event_delete.php" class="btn btn-success">Delete</a>
+					<a href="tournaments.php" class="btn btn-success">Back to tournaments</a>
                 </p>
             <div class="row">
                 <table class="table table-striped table-bordered">
@@ -34,8 +35,7 @@
                   </thead>
                   <tbody>
                   <?php
-                   include 'database.php';
-                   $pdo = Database::connect();
+                   include '../database/database_pdo.php';
                    $sql = 'SELECT * FROM events ORDER BY id DESC';
                    foreach ($pdo->query($sql) as $row) {
                             echo '<tr>';
@@ -55,7 +55,6 @@
                                 echo '</td>';
                             echo '</tr>';
                    }
-                   Database::disconnect();
                   ?>
                   </tbody>
             </table>

@@ -1,5 +1,5 @@
 <?php
-    require 'database.php';
+    require '../database/database_pdo.php';
     $id = null;
     if ( !empty($_GET['id'])) {
         $id = $_REQUEST['id'];
@@ -8,14 +8,13 @@
     if ( null==$id ) {
         header("Location: tournaments.php");
     } else {
-        $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql = "SELECT * FROM tournaments where id = ?";
         $q = $pdo->prepare($sql);
         $q->execute(array($id));
         $data = $q->fetch(PDO::FETCH_ASSOC);
-        Database::disconnect();
     }
+	
 ?>
  
 <!DOCTYPE html>
@@ -84,6 +83,7 @@
                         </div>
                       </div>
                         <div class="form-actions">
+						  <a class="btn" href="events.php?id=<?php echo $id;?> ">Create an Event</a>
                           <a class="btn" href="tournaments.php">Back</a>
                        </div>
                      
